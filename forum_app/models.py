@@ -17,6 +17,3 @@ class Comment(models.Model):
     text = models.TextField(blank=True, null=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE)
     created_at = models.DateTimeField()
-
-    def __str__(self):
-            return self.title
