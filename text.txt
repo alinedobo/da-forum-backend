@@ -5,27 +5,32 @@ register
     "email": "test@test2.de",
     "repeated_password": "123412aA"
 }
+
 login 1 mitglied
 {
     "username": "xmitglied",
     "password": "123412aA"
 }
+
 login2 mod
 {
     "username": "xmod",
     "password": "aA123412"
 }
+
 login3 admin
 {
     "username": "x",
     "password": "1234"
 }
+
 post erstellen
 {
     "title": "test ersterpost!",
     "content": "super toller post :D",
     "author": 1
 }
+
 comment erstellen
 {
     "post": 1,
