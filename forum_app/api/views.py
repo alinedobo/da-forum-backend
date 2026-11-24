@@ -7,25 +7,21 @@ from rest_framework.permissions import IsAuthenticatedOrReadOnly, IsAuthenticate
 class PostCreateListView(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [AllowAny]
-
-    def perform_create(self, serializer):
-        serializer.save(author=self.request.user) 
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
 class PostDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    permission_classes = [AllowAny]
+    permission_classes = [IsAuthenticatedOrReadOnly]
+
 
 class CommentCreateListView(generics.ListCreateAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]
 
-    def perform_create(self, serializer):
-            pk = self.kwargs.get('pk')
-            commented_post = Post.objects.get(pk=pk)
-            serializer.save(author=self.request.user, post=commented_post) 
 
 class CommentDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
+    permission_classes = [IsAuthenticatedOrReadOnly]

@@ -5,10 +5,18 @@ from forum_app.models import Post, Comment
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['title', 'content', 'author']
+
+    def perform_create(self, serializer):
+            serializer.save(author=self.request.user) 
 
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = '__all__'
+        fields = ['post', 'text', 'author']
+
+    def perform_create(self, serializer):
+        pk = self.kwargs.get('pk')
+        commented_post = Post.objects.get(pk=pk)
+        serializer.save(author=self.request.user, post=commented_post) 
