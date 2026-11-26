@@ -1,22 +1,29 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
 from forum_app.models import Post, Comment
+# SOLUTION
+# from forum_app.models import Comment, Post
+# from rest_framework import serializers
 
 class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
-        fields = ['title', 'content', 'author']
+        fields = ['id', 'title', 'content', 'author']
 
-    def perform_create(self, serializer):
-            serializer.save(author=self.request.user) 
+# SOLUTION
+# class PostSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Post
+#         fields = '__all__'
 
 
 class CommentSerializer(serializers.ModelSerializer):
     class Meta:
         model = Comment
-        fields = ['post', 'text', 'author']
+        fields = ['id', 'post', 'text', 'author']
 
-    def perform_create(self, serializer):
-        pk = self.kwargs.get('pk')
-        commented_post = Post.objects.get(pk=pk)
-        serializer.save(author=self.request.user, post=commented_post) 
+# SOLUTION
+# class CommentSerializer(serializers.ModelSerializer):
+#     class Meta:
+#         model = Comment
+#         fields = '__all__'
