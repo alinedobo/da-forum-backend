@@ -37,3 +37,7 @@ comment erstellen
     "text": "comment 1 zum ersten post",
     "author": 1
 }
+
+Björn:
+Zu deiner Frage: das ist, weil der Serializer und die Views nichts voneinander wissen und perform_create setzt den Author nur beim speichern
+Ja, genau. du schickst author: 1 nur mit, damit der serializer zufrieden ist. anschließend wird es mit dem eingeloggten user überschrieben.
